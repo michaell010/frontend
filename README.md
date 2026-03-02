@@ -1,5 +1,4 @@
 # frontend
-# frontend
 # 🚀 Mi App Node con Docker
 
 Aplicación básica creada con Node.js y Docker usando Express.
