@@ -1,0 +1,521 @@
+/* ============================================================
+   GanaControl — Home.css
+   Landing page corporativa · Verde campo natural
+   ============================================================ */
+
+:root {
+  --green-dk:    #1a3d1a;
+  --green-md:    #235c23;
+  --green-corp:  #2e7d2e;
+  --green-btn:   #3a9c3a;
+  --green-lt:    #4db84d;
+  --green-sage:  #6aaa4a;
+  --green-field: #a8c878;
+  --green-pale:  #d4e8b0;
+  --green-bg:    #f0f7e8;
+  --earth:       #6b4c1e;
+  --earth-lt:    #9a7030;
+  --rust:        #8b4513;
+  --sky:         #5a8a9f;
+  --cream:       #faf7f0;
+  --parch:       #f2edd8;
+  --parch2:      #e8e0c8;
+  --text:        #0f200f;
+  --text-mid:    #2a3d1a;
+  --text-lt:     #5a7048;
+  --text-xs:     #8a9878;
+  --white:       #ffffff;
+  --border:      rgba(46, 125, 46, 0.2);
+  --border-lt:   rgba(46, 125, 46, 0.1);
+  --shadow-sm:   0 2px 12px rgba(15, 32, 15, 0.08);
+  --shadow-md:   0 6px 30px rgba(15, 32, 15, 0.12);
+  --shadow-lg:   0 12px 60px rgba(15, 32, 15, 0.16);
+}
+
+/* ── Reset ─────────────────────────────── */
+.home-page * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.home-page {
+  font-family: "Inter", sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  overflow-x: hidden;
+}
+.home-page h1,
+.home-page h2,
+.home-page h3,
+.home-page .serif {
+  font-family: "Merriweather", serif;
+}
+
+/* ── NAVBAR ─────────────────────────────── */
+.gc-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 999;
+  background: rgba(26, 61, 26, 0.97);
+  backdrop-filter: blur(16px);
+  border-bottom: 3px solid var(--green-btn);
+  padding: 0 3.5rem;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 20px rgba(15, 32, 15, 0.3);
+}
+.gc-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+.gc-logo-shield {
+  width: 42px; height: 42px;
+  background: linear-gradient(160deg, #3a9c3a, #1a3d1a);
+  border-radius: 10px 10px 14px 14px;
+  border: 2px solid var(--green-lt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  box-shadow: 0 3px 12px rgba(15, 32, 15, 0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+  position: relative;
+}
+.gc-logo-shield::after {
+  content: "✓";
+  position: absolute;
+  bottom: 1px; right: 3px;
+  font-size: 9px;
+  color: var(--green-lt);
+  font-weight: 900;
+}
+.gc-logo-name {
+  font-family: "Merriweather", serif;
+  font-weight: 900;
+  font-size: 1.2rem;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+  line-height: 1.1;
+  display: block;
+}
+.gc-logo-tag {
+  font-size: 0.62rem;
+  color: var(--green-pale);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: block;
+}
+.gc-nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+.gc-nav-links a {
+  color: rgba(255,255,255,0.75);
+  font-size: 0.85rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+  letter-spacing: 0.3px;
+}
+.gc-nav-links a:hover { color: #ffffff; }
+.gc-nav-actions { display: flex; gap: 0.8rem; align-items: center; }
+.gc-btn-out {
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.85);
+  padding: 8px 20px;
+  border-radius: 7px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+  transition: all 0.2s;
+}
+.gc-btn-out:hover { border-color: #fff; color: #fff; }
+.gc-btn-solid {
+  background: var(--green-btn);
+  border: none;
+  color: #fff;
+  padding: 9px 22px;
+  border-radius: 7px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+  box-shadow: 0 3px 12px rgba(58,156,58,0.4);
+  transition: all 0.2s;
+}
+.gc-btn-solid:hover { background: var(--green-lt); transform: translateY(-1px); }
+
+/* ── HERO ───────────────────────────────── */
+.gc-hero {
+  min-height: 100vh;
+  background: linear-gradient(170deg, var(--green-dk) 0%, var(--green-md) 45%, var(--green-corp) 100%);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 90px 3.5rem 60px;
+}
+.gc-hero-topo {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0.07;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 38px, rgba(168,200,120,0.8) 38px, rgba(168,200,120,0.8) 40px),
+    repeating-linear-gradient(90deg, transparent, transparent 58px, rgba(168,200,120,0.4) 58px, rgba(168,200,120,0.4) 60px);
+}
+.gc-hero-diagonal {
+  position: absolute; right: -80px; top: 0; bottom: 0; width: 55%;
+  background: linear-gradient(160deg, rgba(58,156,58,0.15) 0%, rgba(26,61,26,0.4) 100%);
+  clip-path: polygon(18% 0, 100% 0, 100% 100%, 0% 100%);
+}
+.gc-hero-circle {
+  position: absolute; right: 8%; top: 50%; transform: translateY(-50%);
+  width: 420px; height: 420px; border-radius: 50%;
+  border: 1px solid rgba(168,200,120,0.2);
+  pointer-events: none;
+}
+.gc-hero-circle::before {
+  content: ""; position: absolute; inset: 20px; border-radius: 50%;
+  border: 1px solid rgba(168,200,120,0.15);
+}
+.gc-hero-circle::after {
+  content: ""; position: absolute; inset: 50px; border-radius: 50%;
+  border: 1px solid rgba(168,200,120,0.1);
+}
+.gc-hero-inner {
+  max-width: 1140px; margin: 0 auto;
+  display: grid; grid-template-columns: 1.1fr 0.9fr;
+  gap: 4rem; align-items: center; width: 100%; position: relative; z-index: 2;
+}
+.gc-hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(168,200,120,0.15);
+  border: 1px solid rgba(168,200,120,0.35);
+  border-radius: 6px; padding: 6px 14px;
+  font-size: 0.72rem; color: var(--green-pale);
+  font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 1.6rem;
+  animation: gcFadeUp 0.7s ease both;
+}
+.gc-hero-badge-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--green-lt);
+  animation: gcPulse 2s ease infinite;
+}
+@keyframes gcPulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+.gc-hero-h1 {
+  font-size: clamp(2rem, 4.2vw, 3.5rem);
+  color: #ffffff; line-height: 1.15; margin-bottom: 1.5rem;
+  animation: gcFadeUp 0.8s ease 0.1s both;
+}
+.gc-hero-h1 span { color: var(--green-pale); display: block; }
+.gc-hero-line {
+  width: 60px; height: 4px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--green-lt), var(--green-sage));
+  margin-bottom: 1.5rem;
+  animation: gcFadeUp 0.8s ease 0.15s both;
+}
+.gc-hero-p {
+  font-size: 1rem; color: rgba(255,255,255,0.72); line-height: 1.9;
+  margin-bottom: 2.5rem; max-width: 460px;
+  animation: gcFadeUp 0.8s ease 0.2s both;
+}
+.gc-hero-btns {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  margin-bottom: 3rem;
+  animation: gcFadeUp 0.8s ease 0.28s both;
+}
+.gc-btn-hero-main {
+  background: linear-gradient(135deg, var(--green-btn), var(--green-lt));
+  border: none; color: #fff; padding: 15px 36px;
+  border-radius: 9px; font-size: 0.95rem; font-weight: 700;
+  font-family: "Inter", sans-serif; cursor: pointer;
+  box-shadow: 0 5px 22px rgba(58,156,58,0.45); transition: all 0.25s;
+}
+.gc-btn-hero-main:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(58,156,58,0.55); }
+.gc-btn-hero-out {
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.3);
+  color: #fff; padding: 14px 28px;
+  border-radius: 9px; font-size: 0.9rem; font-weight: 600;
+  font-family: "Inter", sans-serif; cursor: pointer; transition: all 0.25s;
+}
+.gc-btn-hero-out:hover { border-color: rgba(255,255,255,0.7); }
+.gc-hero-stats {
+  display: flex;
+  background: rgba(0,0,0,0.25); border-radius: 12px;
+  border: 1px solid rgba(168,200,120,0.15);
+  overflow: hidden;
+  animation: gcFadeUp 0.8s ease 0.35s both;
+}
+.gc-hstat {
+  flex: 1; padding: 1.1rem 1.4rem; text-align: center;
+  border-right: 1px solid rgba(168,200,120,0.12);
+}
+.gc-hstat:last-child { border-right: none; }
+.gc-hstat-num {
+  font-family: "Merriweather", serif; font-size: 1.8rem;
+  font-weight: 900; color: var(--green-pale); line-height: 1;
+}
+.gc-hstat-lbl { font-size: 0.68rem; color: rgba(255,255,255,0.45); margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; }
+
+/* Dashboard card */
+.gc-hero-card {
+  background: rgba(255,255,255,0.96);
+  border-radius: 20px;
+  box-shadow: 0 16px 70px rgba(15,32,15,0.35), 0 1px 0 rgba(255,255,255,0.5) inset;
+  border: 1px solid rgba(168,200,120,0.25);
+  overflow: hidden;
+  animation: gcFadeUp 0.9s ease 0.15s both;
+}
+.gc-hc-bar {
+  background: var(--green-dk); padding: 0.85rem 1.2rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.gc-hc-dots { display: flex; gap: 5px; }
+.gc-hc-dot { width: 10px; height: 10px; border-radius: 50%; }
+.gc-hc-title { font-size: 0.72rem; color: rgba(212,232,176,0.8); font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; }
+.gc-hc-body { padding: 1.2rem; }
+.gc-hc-mini-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.7rem; margin-bottom: 1rem; }
+.gc-hc-mini {
+  background: var(--green-bg); border: 1px solid rgba(46,125,46,0.15);
+  border-radius: 10px; padding: 0.85rem 0.9rem; text-align: center;
+}
+.gc-hc-mini-val { font-family: "Merriweather", serif; font-size: 1.3rem; font-weight: 900; color: var(--green-dk); line-height: 1; }
+.gc-hc-mini-lbl { font-size: 0.62rem; color: var(--text-lt); margin-top: 3px; text-transform: uppercase; letter-spacing: 0.8px; }
+.gc-hc-table { width: 100%; border-collapse: collapse; }
+.gc-hc-table th { background: var(--parch); padding: 0.5rem 0.7rem; font-size: 0.62rem; color: var(--text-lt); text-align: left; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+.gc-hc-table td { padding: 0.5rem 0.7rem; font-size: 0.76rem; color: var(--text-mid); border-bottom: 1px solid var(--green-bg); }
+.gc-hc-table tr:last-child td { border-bottom: none; }
+.gc-pill { display: inline-block; padding: 2px 8px; border-radius: 5px; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.5px; }
+.gc-pill-ok   { background: rgba(46,125,46,0.12); color: var(--green-corp); }
+.gc-pill-warn { background: rgba(139,69,19,0.1);  color: var(--rust); }
+.gc-pill-blue { background: rgba(90,138,159,0.12); color: var(--sky); }
+
+@keyframes gcFadeUp { from{opacity:0;transform:translateY(28px);} to{opacity:1;transform:none;} }
+
+/* ── BANNER CORPORATIVO ─────────────────── */
+.gc-corp-banner {
+  background: var(--green-dk);
+  border-top: 4px solid var(--green-btn);
+  border-bottom: 4px solid var(--green-btn);
+  padding: 1.2rem 3.5rem;
+  display: flex; align-items: center; justify-content: center;
+  gap: 4rem; flex-wrap: wrap;
+}
+.gc-cb-item { display: flex; align-items: center; gap: 0.7rem; }
+.gc-cb-icon { font-size: 1.2rem; }
+.gc-cb-text { font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.85); letter-spacing: 0.3px; }
+.gc-cb-sep { color: rgba(168,200,120,0.3); font-size: 1.2rem; }
+
+/* ── SECTION BASE ───────────────────────── */
+.gc-sec { padding: 90px 3.5rem; }
+.gc-sec-green  { background: var(--green-bg); }
+.gc-sec-white  { background: var(--white); }
+.gc-sec-cream  { background: var(--cream); }
+.gc-sec-dark   { background: var(--green-dk); }
+.gc-sec-parch  { background: var(--parch); }
+.gc-max  { max-width: 1140px; margin: 0 auto; }
+.gc-max-860 { max-width: 860px; margin: 0 auto; }
+.gc-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--green-corp); margin-bottom: 0.9rem;
+}
+.gc-eyebrow::before { content: ""; display: block; width: 28px; height: 2px; background: var(--green-corp); border-radius: 1px; }
+.gc-h2      { font-size: clamp(1.8rem,3vw,2.5rem); color: var(--green-dk); margin-bottom: 0.7rem; line-height: 1.25; }
+.gc-h2-white { color: #ffffff; }
+.gc-p       { color: var(--text-lt); font-size: 0.93rem; line-height: 1.8; }
+.gc-center  { text-align: center; margin-bottom: 3.5rem; }
+.gc-center .gc-eyebrow::before { margin: 0 auto; }
+
+/* ── TIMELINE ───────────────────────────── */
+.gc-tl-wrap { display: flex; align-items: flex-start; justify-content: center; margin-bottom: 3.5rem; flex-wrap: wrap; }
+.gc-tl-step { display: flex; flex-direction: column; align-items: center; gap: 10px; position: relative; }
+.gc-tl-ball {
+  width: 78px; height: 78px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-size: 1.9rem;
+  background: var(--white); border: 3px solid var(--green-pale);
+  box-shadow: var(--shadow-md); transition: all 0.3s; cursor: default;
+}
+.gc-tl-ball:hover { border-color: var(--green-corp); transform: scale(1.07); }
+.gc-tl-num {
+  position: absolute; top: -6px; left: -6px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--green-corp); color: #fff;
+  font-size: 0.65rem; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+}
+.gc-tl-lbl { font-family: "Merriweather", serif; font-size: 0.85rem; font-weight: 700; color: var(--green-dk); text-align: center; }
+.gc-tl-sub { font-size: 0.72rem; color: var(--text-lt); text-align: center; max-width: 85px; line-height: 1.4; }
+.gc-tl-conn {
+  width: 70px; height: 2px;
+  background: linear-gradient(90deg, var(--green-pale), var(--green-field));
+  flex-shrink: 0; margin-top: 38px; position: relative;
+}
+.gc-tl-conn::after { content: "▶"; position: absolute; right: -8px; top: 50%; transform: translateY(-50%); color: var(--green-sage); font-size: 0.7rem; }
+
+/* ── FEAT CARDS ─────────────────────────── */
+.gc-feat-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.2rem; }
+.gc-feat-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-top: 3px solid var(--green-corp);
+  border-radius: 10px; padding: 1.5rem;
+  box-shadow: var(--shadow-sm); transition: all 0.3s;
+}
+.gc-feat-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); border-top-color: var(--green-lt); }
+.gc-feat-ico { font-size: 1.8rem; margin-bottom: 0.8rem; }
+.gc-feat-t { font-family: "Merriweather", serif; font-weight: 700; color: var(--green-dk); font-size: 0.88rem; margin-bottom: 0.4rem; }
+.gc-feat-d { color: var(--text-lt); font-size: 0.8rem; line-height: 1.65; }
+
+/* ── DOS COLUMNAS ───────────────────────── */
+.gc-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.gc-check-list { display: flex; flex-direction: column; gap: 0.9rem; }
+.gc-check-row { display: flex; align-items: flex-start; gap: 0.85rem; font-size: 0.9rem; color: var(--text-mid); line-height: 1.55; }
+.gc-chk {
+  width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0; margin-top: 1px;
+  background: var(--green-bg); border: 1.5px solid var(--green-corp);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--green-corp); font-size: 0.7rem; font-weight: 900;
+}
+
+/* ── GESTACIÓN ──────────────────────────── */
+.gc-gest-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; box-shadow: var(--shadow-md); }
+.gc-gest-animal { display: flex; align-items: center; gap: 1rem; background: var(--green-bg); border-radius: 10px; padding: 0.9rem 1.1rem; margin-bottom: 1.5rem; border: 1px solid rgba(46,125,46,0.15); }
+.gc-gest-ico { font-size: 2.2rem; }
+.gc-gest-name { font-family: "Merriweather", serif; font-weight: 700; color: var(--green-dk); font-size: 0.95rem; }
+.gc-gest-code { font-size: 0.72rem; color: var(--text-lt); margin-top: 1px; }
+.gc-gest-stat { font-weight: 700; color: var(--green-corp); font-size: 0.82rem; margin-left: auto; text-align: right; }
+.gc-gest-stat-sub { font-size: 0.68rem; color: var(--text-xs); font-weight: 400; }
+.gc-gest-bar-label { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-lt); margin-bottom: 0.4rem; }
+.gc-gest-bar-label span:last-child { color: var(--green-corp); font-weight: 700; }
+.gc-gest-bar-track { background: var(--green-bg); border-radius: 999px; height: 12px; overflow: hidden; margin-bottom: 0.5rem; border: 1px solid rgba(46,125,46,0.12); }
+.gc-gest-bar-fill {
+  height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, var(--green-corp), var(--green-lt), var(--green-sage));
+  width: 72%; animation: gcBarFill 2.5s ease 0.6s both;
+  position: relative; overflow: hidden;
+}
+.gc-gest-bar-fill::after {
+  content: ""; position: absolute; top: 0; left: -100%; right: 0; bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  animation: gcShimmer 2s ease 2.5s infinite;
+}
+@keyframes gcBarFill   { from{width:0%} to{width:72%} }
+@keyframes gcShimmer   { from{left:-100%} to{left:100%} }
+.gc-gest-stages { display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--text-xs); margin-bottom: 1.3rem; }
+.gc-gest-result { background: var(--green-bg); border-radius: 10px; padding: 1rem 1.2rem; border: 1px solid rgba(46,125,46,0.18); display: flex; align-items: center; justify-content: space-between; }
+.gc-gest-res-lbl { font-size: 0.7rem; color: var(--text-lt); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.2rem; }
+.gc-gest-res-val { font-family: "Merriweather", serif; font-weight: 700; color: var(--green-dk); font-size: 1rem; }
+.gc-gest-res-badge { background: var(--green-corp); color: #fff; padding: 5px 12px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; }
+
+/* ── CALENDARIO SANITARIO ───────────────── */
+.gc-cal-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-md); }
+.gc-cal-head { background: linear-gradient(135deg, var(--green-dk), var(--green-md)); padding: 1rem 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+.gc-cal-head-t { font-family: "Merriweather", serif; font-weight: 700; color: #fff; font-size: 0.95rem; }
+.gc-cal-head-p { font-size: 0.72rem; color: var(--green-pale); background: rgba(255,255,255,0.1); padding: 3px 10px; border-radius: 5px; }
+.gc-cal-body { padding: 1.2rem; }
+.gc-ev-row { display: flex; align-items: center; gap: 0.8rem; padding: 0.75rem 0.9rem; border-radius: 8px; margin-bottom: 0.4rem; border: 1px solid transparent; transition: all 0.2s; cursor: default; }
+.gc-ev-row:hover { background: var(--green-bg); border-color: rgba(46,125,46,0.15); }
+.gc-ev-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.gc-ev-name { font-size: 0.82rem; font-weight: 600; color: var(--text); display: block; }
+.gc-ev-meta { font-size: 0.68rem; color: var(--text-lt); margin-top: 1px; display: block; }
+.gc-badge { font-size: 0.64rem; padding: 3px 9px; border-radius: 5px; font-weight: 700; letter-spacing: 0.5px; white-space: nowrap; }
+.gc-b-pend { background: rgba(139,69,19,0.1); color: var(--rust); }
+.gc-b-done { background: rgba(46,125,46,0.12); color: var(--green-corp); }
+.gc-b-next { background: rgba(90,138,159,0.12); color: var(--sky); }
+
+/* ── KPI LIST ───────────────────────────── */
+.gc-kpi-list { display: flex; flex-direction: column; gap: 1rem; }
+.gc-kpi-card { display: flex; justify-content: space-between; align-items: center; background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--green-corp); border-radius: 10px; padding: 1.1rem 1.4rem; box-shadow: var(--shadow-sm); transition: all 0.2s; cursor: default; }
+.gc-kpi-card:hover { transform: translateX(4px); box-shadow: var(--shadow-md); }
+.gc-kpi-left { display: flex; align-items: center; gap: 0.9rem; }
+.gc-kpi-ico { font-size: 1.3rem; }
+.gc-kpi-lbl { font-size: 0.85rem; color: var(--text-mid); font-weight: 500; }
+.gc-kpi-val { font-family: "Merriweather", serif; font-size: 1.9rem; font-weight: 900; color: var(--green-dk); }
+
+/* ── STOCK ──────────────────────────────── */
+.gc-stock-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-md); }
+.gc-stock-head { background: linear-gradient(135deg, var(--green-dk), var(--green-md)); padding: 1rem 1.4rem; display: flex; justify-content: space-between; align-items: center; }
+.gc-stock-head-t { font-family: "Merriweather", serif; font-weight: 700; color: #fff; font-size: 0.95rem; }
+.gc-stock-head-tag { background: rgba(255,255,255,0.15); color: var(--green-pale); font-size: 0.68rem; font-weight: 700; padding: 3px 10px; border-radius: 5px; letter-spacing: 1px; }
+.gc-stock-body { padding: 1.4rem; }
+.gc-stock-item { margin-bottom: 1.2rem; }
+.gc-stock-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; }
+.gc-stock-nm { font-size: 0.82rem; color: var(--text-mid); font-weight: 500; display: flex; align-items: center; gap: 0.4rem; }
+.gc-stock-vl { font-size: 0.82rem; font-weight: 700; }
+.gc-stock-track { background: var(--green-bg); border-radius: 999px; height: 8px; border: 1px solid rgba(46,125,46,0.1); overflow: hidden; }
+.gc-stock-bar { height: 100%; border-radius: 999px; }
+.gc-alert-bar { background: rgba(139,69,19,0.07); border: 1px solid rgba(139,69,19,0.2); border-radius: 9px; padding: 0.85rem 1.1rem; display: flex; align-items: center; gap: 0.8rem; margin-top: 0.5rem; }
+.gc-alert-t { font-size: 0.8rem; font-weight: 700; color: var(--rust); }
+.gc-alert-s { font-size: 0.7rem; color: var(--text-lt); margin-top: 1px; }
+
+/* ── FACTURA ────────────────────────────── */
+.gc-invoice { background: var(--white); border: 1px solid var(--border); border-top: 5px solid var(--green-corp); border-radius: 14px; padding: 2.2rem; max-width: 500px; margin: 0 auto; box-shadow: var(--shadow-lg); animation: gcFadeUp 1s ease 0.2s both; }
+.gc-inv-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; }
+.gc-inv-brand-name { font-family: "Merriweather", serif; font-weight: 900; font-size: 1.1rem; color: var(--green-dk); }
+.gc-inv-brand-sub { font-size: 0.68rem; color: var(--text-lt); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+.gc-inv-num-badge { background: linear-gradient(135deg, var(--green-dk), var(--green-md)); color: var(--green-pale); padding: 0.5rem 1rem; border-radius: 8px; font-family: "Merriweather", serif; font-weight: 700; font-size: 0.9rem; text-align: right; }
+.gc-inv-num-sub { font-size: 0.62rem; color: rgba(212,232,176,0.7); margin-top: 2px; }
+.gc-inv-meta { display: flex; justify-content: space-between; background: var(--green-bg); border-radius: 9px; padding: 0.85rem 1rem; margin-bottom: 1.3rem; }
+.gc-inv-meta-lbl { font-size: 0.62rem; color: var(--text-lt); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+.gc-inv-meta-val { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+.gc-inv-paid { display: inline-block; background: rgba(46,125,46,0.15); color: var(--green-corp); padding: 4px 12px; border-radius: 5px; font-size: 0.65rem; font-weight: 800; margin-top: 3px; letter-spacing: 0.5px; }
+.gc-inv-line { display: flex; justify-content: space-between; padding: 0.6rem 0; font-size: 0.84rem; border-bottom: 1px solid var(--green-bg); }
+.gc-inv-line:last-child { border-bottom: none; }
+.gc-inv-line-main { color: var(--text); font-weight: 600; }
+.gc-inv-line-sub  { color: var(--text-lt); }
+.gc-inv-total { display: flex; justify-content: space-between; background: linear-gradient(135deg, var(--green-dk), var(--green-md)); border-radius: 10px; padding: 1rem 1.2rem; margin-top: 1.2rem; }
+.gc-inv-total-lbl { font-family: "Merriweather", serif; font-weight: 700; color: var(--green-pale); font-size: 0.9rem; }
+.gc-inv-total-val { font-family: "Merriweather", serif; font-weight: 900; font-size: 1.4rem; color: #fff; }
+
+/* ── MÉTRICAS ───────────────────────────── */
+.gc-metrics-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+.gc-metric-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(168,200,120,0.15); border-top: 4px solid var(--green-lt); border-radius: 14px; padding: 2.2rem 1.8rem; text-align: center; transition: all 0.3s; cursor: default; position: relative; overflow: hidden; }
+.gc-metric-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-4px); }
+.gc-metric-card::before { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--green-lt), transparent); }
+.gc-metric-ico { font-size: 2.2rem; margin-bottom: 0.7rem; }
+.gc-metric-val { font-family: "Merriweather", serif; font-size: 2.8rem; font-weight: 900; color: var(--green-pale); line-height: 1; margin-bottom: 0.5rem; }
+.gc-metric-lbl { color: rgba(255,255,255,0.75); font-size: 0.87rem; font-weight: 600; margin-bottom: 0.3rem; }
+.gc-metric-key { color: rgba(255,255,255,0.2); font-size: 0.68rem; font-family: "Courier New", monospace; }
+
+/* ── POR QUÉ ────────────────────────────── */
+.gc-why-6 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.3rem; }
+.gc-why-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.6rem; display: flex; gap: 1rem; transition: all 0.3s; cursor: default; box-shadow: var(--shadow-sm); }
+.gc-why-card:hover { border-color: var(--green-corp); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.gc-why-ico-wrap { width: 42px; height: 42px; flex-shrink: 0; border-radius: 10px; background: var(--green-bg); border: 1px solid rgba(46,125,46,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
+.gc-why-t { font-family: "Merriweather", serif; font-weight: 700; color: var(--green-dk); font-size: 0.88rem; margin-bottom: 0.35rem; }
+.gc-why-d { color: var(--text-lt); font-size: 0.78rem; line-height: 1.65; }
+
+/* ── CTA ────────────────────────────────── */
+.gc-cta-box { max-width: 680px; margin: 0 auto; text-align: center; background: var(--white); border: 1px solid var(--border); border-top: 5px solid var(--green-corp); border-radius: 18px; padding: 4rem 3.5rem; box-shadow: var(--shadow-lg); }
+.gc-cta-ico { font-size: 3.5rem; margin-bottom: 1rem; }
+.gc-cta-h2 { font-size: 2rem; color: var(--green-dk); margin-bottom: 1rem; }
+.gc-cta-p { color: var(--text-lt); line-height: 1.85; margin-bottom: 2rem; font-size: 0.95rem; }
+.gc-cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.gc-btn-cta { background: linear-gradient(135deg, var(--green-md), var(--green-btn)); border: none; color: #fff; padding: 14px 36px; border-radius: 9px; font-size: 0.95rem; font-weight: 700; font-family: "Inter", sans-serif; cursor: pointer; box-shadow: 0 5px 20px rgba(46,125,46,0.35); transition: all 0.25s; }
+.gc-btn-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(46,125,46,0.45); }
+.gc-btn-cta-ghost { background: transparent; border: 2px solid var(--border); color: var(--text-mid); padding: 14px 28px; border-radius: 9px; font-size: 0.9rem; cursor: pointer; transition: all 0.25s; font-family: "Inter", sans-serif; }
+.gc-btn-cta-ghost:hover { border-color: var(--green-corp); color: var(--green-corp); }
+
+/* ── FOOTER ─────────────────────────────── */
+.gc-footer { background: var(--green-dk); border-top: 4px solid var(--green-corp); padding: 2.5rem 3.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+.gc-foot-brand { display: flex; align-items: center; gap: 10px; }
+.gc-foot-shield { width: 34px; height: 34px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.gc-foot-name { font-family: "Merriweather", serif; font-weight: 700; color: #fff; font-size: 1rem; display: block; }
+.gc-foot-tag { font-size: 0.62rem; color: var(--green-pale); letter-spacing: 1.5px; text-transform: uppercase; display: block; }
+.gc-foot-links { display: flex; gap: 2rem; list-style: none; }
+.gc-foot-links a { color: rgba(255,255,255,0.45); font-size: 0.8rem; text-decoration: none; transition: color 0.2s; }
+.gc-foot-links a:hover { color: #fff; }
+.gc-foot-copy { color: rgba(255,255,255,0.28); font-size: 0.75rem; }
+
+/* ── REVEAL ─────────────────────────────── */
+.gc-rev   { opacity:0; transform:translateY(28px);  transition:opacity .65s ease, transform .65s ease; }
+.gc-rev-l { opacity:0; transform:translateX(-28px); transition:opacity .65s ease, transform .65s ease; }
+.gc-rev-r { opacity:0; transform:translateX(28px);  transition:opacity .65s ease, transform .65s ease; }
+.gc-rev.on, .gc-rev-l.on, .gc-rev-r.on { opacity:1; transform:none; }
