@@ -1,4 +1,3 @@
-// src/services/AuthService.jsx
 import api from "./api";
 
 // Login — guarda token y usuario en localStorage

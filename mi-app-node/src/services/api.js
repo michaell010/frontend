@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+const BASE_URL = import.meta.env.VITE_API_URL || "https://sturdy-spork-g4prvjq5r4453wj6p-3000.app.github.dev/";
 
 const api = async (endpoint, options = {}) => {
   const token = localStorage.getItem("token");
