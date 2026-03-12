@@ -1,7 +1,7 @@
-import AppRouter from "./routes/AppRouter";
+import Login from "./pages/public/Login";
 
 function App() {
-  return <AppRouter />;
+  return <Login />;
 }
 
 export default App;
