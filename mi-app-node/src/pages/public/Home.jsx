@@ -8,7 +8,9 @@ export default function Home() {
   useEffect(() => {
     const els = document.querySelectorAll(".gc-rev, .gc-rev-l, .gc-rev-r");
     const io = new IntersectionObserver(
-      (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("on"); io.unobserve(e.target); } }),
+      (entries) => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add("on"); io.unobserve(e.target); }
+      }),
       { threshold: 0.1 }
     );
     els.forEach(el => io.observe(el));
@@ -20,7 +22,7 @@ export default function Home() {
     { ico: "🧬", nombre: "Reproducción y Genética", desc: "Gestión de servicios, gestaciones y partos con cálculo automático de fechas." },
     { ico: "💉", nombre: "Salud y Sanidad",          desc: "Vacunaciones, tratamientos y eventos sanitarios con alertas de próximas fechas." },
     { ico: "📦", nombre: "Inventario Inteligente",   desc: "Control de alimentos, medicamentos e insumos con alertas de stock mínimo." },
-    { ico: "🌿", nombre: "Malla Digital",            desc: "Gestión de potreros, rotación de pasturas y capacidad de carga por hectárea." },
+    { ico: "🌿", nombre: "Potreros",                 desc: "Gestión de potreros, rotación de pasturas y capacidad de carga por hectárea." },
     { ico: "💰", nombre: "Cockpit Financiero",        desc: "Ventas, facturación automática e ingresos consolidados por período." },
     { ico: "🌾", nombre: "Alimentación",             desc: "Raciones diarias por animal con control de consumo y observaciones." },
     { ico: "🎛️", nombre: "Mando Central",            desc: "Vista ejecutiva con KPIs clave, alertas activas y resumen de la operación." },
@@ -250,7 +252,7 @@ export default function Home() {
           <div className="gc-center gc-rev">
             <span className="gc-eyebrow" style={{color:"var(--green-sage)"}}>Contacto</span>
             <h2 className="gc-h2 gc-h2-white">¿Listo para modernizar su finca?</h2>
-            <p className="gc-p" style={{color:"rgba(255,255,255,0.55)"}}>Contáctenos o cree su cuenta ahora mismo</p>
+            <p className="gc-p" style={{color:"rgba(255,255,255,0.55)"}}>Contáctenos o ingrese al sistema</p>
           </div>
           <div className="gc-contacto-grid gc-rev">
             <div className="gc-contacto-info">
@@ -283,10 +285,9 @@ export default function Home() {
         <div className="gc-max">
           <div className="gc-cta-box gc-rev">
             <div className="gc-cta-ico">🐂</div>
-            <h2 className="gc-cta-h2">Empiece hoy sin costo</h2>
+            <h2 className="gc-cta-h2">Acceda al sistema ahora</h2>
             <p className="gc-cta-p">
-              Cree su cuenta, configure su finca y comience a gestionar su ganado
-              de forma profesional en minutos.
+              Ingrese a GanaControl y gestione su finca de forma profesional.
             </p>
             <div className="gc-cta-btns">
               <button className="gc-btn-cta" onClick={() => navigate("/login")}>Iniciar Sesión</button>
