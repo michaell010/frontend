@@ -51,8 +51,7 @@ export default function Home() {
           <li><a href="#contacto">Contacto</a></li>
         </ul>
         <div className="gc-nav-actions">
-          <button className="gc-btn-out"   onClick={() => navigate("/login")}>Iniciar Sesión</button>
-          <button className="gc-btn-solid" onClick={() => navigate("/registro")}>Registrarse</button>
+          <button className="gc-btn-solid" onClick={() => navigate("/login")}>Iniciar Sesión</button>
         </div>
       </nav>
 
@@ -78,11 +77,8 @@ export default function Home() {
               ganaderos colombianos que exigen precisión y control total.
             </p>
             <div className="gc-hero-btns">
-              <button className="gc-btn-hero-main" onClick={() => navigate("/registro")}>
-                Comenzar Gratis →
-              </button>
-              <button className="gc-btn-hero-out" onClick={() => navigate("/login")}>
-                Iniciar Sesión
+              <button className="gc-btn-hero-main" onClick={() => navigate("/login")}>
+                Iniciar Sesión →
               </button>
             </div>
             <div className="gc-hero-stats">
@@ -293,8 +289,7 @@ export default function Home() {
               de forma profesional en minutos.
             </p>
             <div className="gc-cta-btns">
-              <button className="gc-btn-cta"       onClick={() => navigate("/registro")}>Crear Cuenta Gratis</button>
-              <button className="gc-btn-cta-ghost" onClick={() => navigate("/login")}>Iniciar Sesión →</button>
+              <button className="gc-btn-cta" onClick={() => navigate("/login")}>Iniciar Sesión</button>
             </div>
           </div>
         </div>

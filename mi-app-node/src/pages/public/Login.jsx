@@ -1,88 +1,95 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { login } from "../../services/AuthService";
 import "../../styles/Login.css";
 
-function Login() {
-  const navigate = useNavigate();
-  const [email, setEmail]       = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError]       = useState("");
-  const [loading, setLoading]   = useState(false);
+export default function Login() {
 
-  const handleLogin = async () => {
-    if (!email || !password) {
-      setError("Por favor completa todos los campos");
-      return;
-    }
-    setLoading(true);
-    setError("");
-    try {
-      await login(email, password);
-      navigate("/dashboard");
-    } catch (err) {
-      setError(err?.message || "Credenciales incorrectas. Intenta de nuevo.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Permitir Enter para login
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") handleLogin();
-  };
+  const [active, setActive] = useState(false);
 
   return (
-    <div className="login-container">
-      <div className="login-box">
-        {/* Logo */}
-        <div style={{ marginBottom: "8px", fontSize: "2.5rem" }}>🐂</div>
-        <h2>GanaControl</h2>
-        <p className="subtitle">Sistema de Gestión Ganadera</p>
+    <div className={`container ${active ? "right-panel-active" : ""}`} id="container">
 
-        {/* Error */}
-        {error && (
-          <p style={{
-            color: "#c0392b", fontSize: "13px",
-            background: "#fdecea", padding: "8px 12px",
-            borderRadius: "6px", marginBottom: "12px"
-          }}>
-            {error}
-          </p>
-        )}
+      {/* Register */}
+      <div className="form-container register-container">
+        <form>
+          <h1>Registro</h1>
+          <input type="text" placeholder="Nombre Completo" />
+          <input type="email" placeholder="Correo Electrónico" />
+          <input type="password" placeholder="Contraseña" />
+          <button type="button">Registrar</button>
 
-        <input
-          type="email"
-          placeholder="Correo electrónico"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          onKeyDown={handleKeyDown}
-          autoComplete="email"
-        />
-        <input
-          type="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          onKeyDown={handleKeyDown}
-          autoComplete="current-password"
-        />
+          <span>Ingresa tus datos para Registrarte</span>
 
-        <button onClick={handleLogin} disabled={loading}>
-          {loading ? "Iniciando sesión..." : "Iniciar Sesión"}
-        </button>
-
-        <p style={{ fontSize: "13px", color: "#777", marginTop: "16px" }}>
-          <span
-            style={{ color: "#2c5364", cursor: "pointer", fontWeight: "600" }}
-            onClick={() => navigate("/recuperar-password")}
-          >
-            ¿Olvidaste tu contraseña?
-          </span>
-        </p>
+          <div className="social-container">
+            <a href="#" className="social">
+              <i className="lni lni-google"></i>
+            </a>
+          </div>
+        </form>
       </div>
+
+      {/* Login */}
+      <div className="form-container login-container">
+        <form>
+          <h1>Iniciar Sesión</h1>
+
+          <input type="email" placeholder="Correo Electrónico" />
+          <input type="password" placeholder="Contraseña" />
+
+          <div className="content">
+            <div className="checkbox">
+              <input type="checkbox" id="remember-me" />
+              <label htmlFor="remember-me">Recordarme</label>
+            </div>
+
+            <div className="pass-link">
+              <a href="#">¿Olvidaste tu contraseña?</a>
+            </div>
+          </div>
+
+          <button type="button">Ingresar</button>
+
+          <span>Ingresa tus datos para continuar</span>
+
+          <div className="social-container">
+            <a href="#" className="social">
+              <i className="lni lni-google"></i>
+            </a>
+          </div>
+        </form>
+      </div>
+
+      {/* Overlay */}
+      <div className="overlay-container">
+        <div className="overlay">
+
+          <div className="overlay-panel overlay-left">
+            <h1>Bienvenido de nuevo!</h1>
+            <p>
+              Para mantenerse conectado con nosotros, por favor inicie sesión
+              con su información personal
+            </p>
+
+            <button className="ghost" onClick={() => setActive(false)}>
+              Iniciar Sesión
+              <i className="lni lni-arrow-left login"></i>
+            </button>
+          </div>
+
+          <div className="overlay-panel overlay-right">
+            <h1 className="title">Tu finca, en tus manos</h1>
+            <p>
+              Ingresa tus datos personales y comienza tu viaje con nosotros
+            </p>
+
+            <button className="ghost" onClick={() => setActive(true)}>
+              Registrarse
+              <i className="lni lni-arrow-right register"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   );
 }
-
-export default Login;
