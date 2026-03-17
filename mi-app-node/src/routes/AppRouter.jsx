@@ -70,8 +70,8 @@ function AppRouter() {
         <Route path="/registro"           element={<Registro />} />
         <Route path="/recuperar-password" element={<RecuperarPassword />} />
 
-        {/* ── Privadas (requieren auth) ── */}
-        <Route element={<PrivateLayout />}>
+        {/* ── Privadas (requieren auth) ──
+        <Route element={<PrivateLayout />}> */}
 
           {/* Dashboard */}
           <Route path="/dashboard" element={<DashBoard />} />
@@ -123,12 +123,12 @@ function AppRouter() {
           <Route path="/configuracion/usuarios" element={<Usuarios />} />
           <Route path="/configuracion/roles"    element={<Roles />} />
 
-        </Route>
+        {/* </Route> */}
 
         {/* Cualquier ruta desconocida → home */}
         <Route path="*" element={<Navigate to="/" replace />} />
 
-      </Routes>
+      </Routes> 
     </BrowserRouter>
   );
 }
