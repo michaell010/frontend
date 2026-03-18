@@ -128,6 +128,7 @@ function AppRouter() {
         {/* Cualquier ruta desconocida → home */}
         <Route path="*" element={<Navigate to="/" replace />} />
 
+
       </Routes> 
     </BrowserRouter>
   );
