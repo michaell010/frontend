@@ -19,3 +19,5 @@ npm run dev
 Construir y levantar el contenedor:
 
 docker compose up --build
+
+Jair es un genio 
