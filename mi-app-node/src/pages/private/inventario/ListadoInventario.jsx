@@ -1,152 +1,165 @@
-import { useState } from "react";
-import "../../../styles/Home.css";
+import { useNavigate } from "react-router-dom";
 
-// tabla: producto
-// campos: tipo, nombre, categoria, unidad, cantidad_actual, cantidad_min, estado, activo
-const MOCK = [
-  { id:1, nombre:"Concentrado Premium Bovino", tipo:"Alimento",     categoria:"Forraje",      unidad:"kg",  cantidad_actual:340, cantidad_min:100, estado:"Operativo", activo:true },
-  { id:2, nombre:"Ivermectina 1% Inyectable",  tipo:"Medicamento",  categoria:"Antiparasitario",unidad:"ml", cantidad_actual:12,  cantidad_min:50,  estado:"Operativo", activo:true },
-  { id:3, nombre:"Vitamina ADE Complejo",      tipo:"Medicamento",  categoria:"Vitamínico",   unidad:"ml",  cantidad_actual:45,  cantidad_min:30,  estado:"Operativo", activo:true },
-  { id:4, nombre:"Sal Mineral Ganadera",       tipo:"Alimento",     categoria:"Suplemento",   unidad:"kg",  cantidad_actual:8,   cantidad_min:50,  estado:"Operativo", activo:true },
-  { id:5, nombre:"Heno de Pasto Kikuyo",       tipo:"Alimento",     categoria:"Forraje",      unidad:"kg",  cantidad_actual:820, cantidad_min:200, estado:"Operativo", activo:true },
-  { id:6, nombre:"Oxitetraciclina 200mg",      tipo:"Medicamento",  categoria:"Antibiótico",  unidad:"ml",  cantidad_actual:60,  cantidad_min:20,  estado:"Operativo", activo:true },
-  { id:7, nombre:"Jeringa Desechable 20ml",    tipo:"Insumo",       categoria:"Descartable",  unidad:"und", cantidad_actual:200, cantidad_min:100, estado:"Operativo", activo:true },
-  { id:8, nombre:"Báscula Ganadera",           tipo:"Equipo",       categoria:"Pesaje",       unidad:"und", cantidad_actual:1,   cantidad_min:1,   estado:"En_Reparacion", activo:true },
+const PRODUCTOS = [
+  { ico:"🌾", nombre:"Grano Premium B1",    id:"GA-10294", fecha:"24 Oct, 2025", estado:"En Stock",   estadoColor:"#22c55e", estadoBg:"rgba(34,197,94,0.2)" },
+  { ico:"💉", nombre:"Vacuna FMD (Lote 22)", id:"VC-99812", fecha:"23 Oct, 2025", estado:"Stock Bajo", estadoColor:"#f97316", estadoBg:"rgba(249,115,22,0.1)" },
+  { ico:"💊", nombre:"Oxitetraciclina 20%",  id:"ME-00122", fecha:"21 Oct, 2025", estado:"Crítico",    estadoColor:"#ef4444", estadoBg:"rgba(239,68,68,0.1)"  },
 ];
 
-const TIPO_COLOR = { Alimento:"cat-green", Medicamento:"cat-blue", Insumo:"cat-earth", Herramienta:"cat-gray", Equipo:"cat-rust", Otro:"cat-gray" };
-const ESTADO_EQ  = { Operativo:"est-ok", En_Reparacion:"est-warn", Dañado:"est-warn", Baja:"est-gray" };
+const SUMINISTROS = [
+  { nombre:"Concentrado Inicio", pct:85,  color:"#22c55e", alerta:false },
+  { nombre:"Vacunas FMD",        pct:42,  color:"#f97316", alerta:true  },
+  { nombre:"Fertilizantes",      pct:92,  color:"#22c55e", alerta:false },
+  { nombre:"Antibióticos",       pct:12,  color:"#ef4444", alerta:true  },
+];
 
 export default function ListadoInventario() {
-  const [busqueda,     setBusqueda]     = useState("");
-  const [filtroTipo,   setFiltroTipo]   = useState("Todos");
-  const [mostrarModal, setMostrarModal] = useState(false);
-  const [modalTipo,    setModalTipo]    = useState("producto");
-
-  const filtrados = MOCK.filter(p => {
-    const matchB = p.nombre.toLowerCase().includes(busqueda.toLowerCase());
-    const matchT = filtroTipo==="Todos" || p.tipo===filtroTipo;
-    return matchB && matchT;
-  });
-
-  const stockBajo = MOCK.filter(p=>p.cantidad_actual<=p.cantidad_min).length;
-
-  const abrirModal = (tipo) => { setModalTipo(tipo); setMostrarModal(true); };
+  const navigate = useNavigate();
 
   return (
-    <div className="mod-page">
-      <div className="mod-header">
-        <div>
-          <div className="mod-breadcrumb">Dashboard / <span>Inventario</span></div>
-          <h1 className="mod-title">📦 Inventario General</h1>
-          <p className="mod-subtitle">Tabla <code>producto</code> — alimentos, medicamentos, insumos y equipos</p>
-        </div>
-        <div style={{display:"flex",gap:"0.7rem"}}>
-          <button className="mod-btn-ghost" onClick={()=>abrirModal("movimiento")}>↕ Registrar Movimiento</button>
-          <button className="mod-btn-primary" onClick={()=>abrirModal("producto")}>+ Nuevo Producto</button>
-        </div>
-      </div>
+    <div style={{ fontFamily:"'Public Sans',sans-serif", background:"linear-gradient(135deg,#fff 0%,#f0fdf4 100%)", minHeight:"100vh", color:"#334155" }}>
+      <main style={{ maxWidth:1280, margin:"0 auto", padding:"2.5rem", display:"flex", flexDirection:"column", gap:"2.5rem" }}>
 
-      {/* KPIs */}
-      <div className="mod-kpis">
-        <div className="mod-kpi"><span className="mod-kpi-ico">📦</span><div><div className="mod-kpi-val">{MOCK.length}</div><div className="mod-kpi-lbl">Productos</div></div></div>
-        <div className="mod-kpi"><span className="mod-kpi-ico">⚠️</span><div><div className="mod-kpi-val" style={{color:"var(--rust)"}}>{stockBajo}</div><div className="mod-kpi-lbl">Stock bajo (≤ mínimo)</div></div></div>
-        <div className="mod-kpi"><span className="mod-kpi-ico">✅</span><div><div className="mod-kpi-val">{MOCK.filter(p=>p.cantidad_actual>p.cantidad_min).length}</div><div className="mod-kpi-lbl">En nivel óptimo</div></div></div>
-        <div className="mod-kpi"><span className="mod-kpi-ico">🔧</span><div><div className="mod-kpi-val">{MOCK.filter(p=>p.estado!=="Operativo").length}</div><div className="mod-kpi-lbl">En reparación/baja</div></div></div>
-      </div>
+        {/* ── HERO ─────────────────────────── */}
+        <section style={{ display:"grid", gridTemplateColumns:"8fr 4fr", gap:"1.5rem" }}>
+          <div style={{ background:"rgba(255,255,255,0.8)", backdropFilter:"blur(16px)", border:"1px solid rgba(34,197,94,0.1)", borderRadius:40, padding:"2.5rem", position:"relative", overflow:"hidden" }}>
+            <div style={{ position:"absolute", top:0, right:0, padding:"2rem", opacity:0.05 }}>
+              <span style={{ fontSize:"12rem", lineHeight:1 }}>⚙️</span>
+            </div>
+            <div style={{ position:"relative" }}>
+              <span style={{ display:"inline-flex", alignItems:"center", gap:8, padding:"0.3rem 0.875rem", borderRadius:999, background:"rgba(134,239,172,0.2)", color:"#22c55e", fontSize:"0.7rem", fontWeight:900, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:"1rem" }}>
+                <span style={{ width:8, height:8, borderRadius:"50%", background:"#22c55e", display:"inline-block" }}></span>
+                Sistema de Telemetría Activo
+              </span>
+              <h1 style={{ fontSize:"clamp(2rem,4vw,3.5rem)", fontWeight:900, lineHeight:1.1, color:"#1e293b", margin:"0 0 1rem", letterSpacing:"-0.05em" }}>
+                Inventario<br /><span style={{ color:"#22c55e" }}>Inteligente v7</span>
+              </h1>
+              <p style={{ fontSize:"1rem", color:"#64748b", maxWidth:500, lineHeight:1.7, margin:"0 0 2rem" }}>
+                Gestión predictiva de suministros y monitoreo de recursos en tiempo real para optimización agrícola.
+              </p>
+              <div style={{ display:"flex", gap:"1rem" }}>
+                <button style={{ display:"flex", alignItems:"center", gap:8, background:"#22c55e", color:"#fff", fontWeight:700, padding:"1rem 2rem", borderRadius:999, border:"none", cursor:"pointer", boxShadow:"0 8px 24px rgba(34,197,94,0.25)", fontSize:"0.875rem" }}>
+                  ➕ Añadir Insumo
+                </button>
+                <button style={{ display:"flex", alignItems:"center", gap:8, background:"#fff", color:"#22c55e", fontWeight:700, padding:"1rem 2rem", borderRadius:999, border:"1px solid rgba(134,239,172,0.3)", cursor:"pointer", fontSize:"0.875rem" }}>
+                  📊 Análisis
+                </button>
+              </div>
+            </div>
+          </div>
 
-      {stockBajo>0 && (
-        <div className="mod-alerta-stock">
-          ⚠️ <strong>{stockBajo} producto{stockBajo>1?"s":""}</strong> con <code>cantidad_actual ≤ cantidad_min</code> — requieren reposición.
-        </div>
-      )}
+          {/* Silos */}
+          <div style={{ background:"rgba(255,255,255,0.8)", backdropFilter:"blur(16px)", border:"1px solid rgba(34,197,94,0.1)", borderRadius:40, padding:"1.5rem", display:"flex", flexDirection:"column", gap:"1rem" }}>
+            <h3 style={{ fontSize:"0.75rem", fontWeight:900, textTransform:"uppercase", letterSpacing:"0.1em", color:"#94a3b8", margin:0 }}>Estado de Silos (Real-Time)</h3>
+            <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:"1rem", flex:1 }}>
+              {[
+                { pct:85, label:"Silo A1", color:"linear-gradient(to top,#4ade80,#bbf7d0)", textColor:"#fff" },
+                { pct:12, label:"Stock Bajo", color:"#fed7aa", textColor:"#475569" },
+                { pct:60, label:"Silo B2", color:"rgba(74,222,128,0.4)", textColor:"#475569" },
+              ].map((s,i) => (
+                <div key={i} style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:8 }}>
+                  <div style={{ flex:1, width:"100%", background:"#fff", borderRadius:"24px 24px 8px 8px", border:"1px solid rgba(34,197,94,0.1)", position:"relative", overflow:"hidden", minHeight:160 }}>
+                    <div style={{ position:"absolute", bottom:0, width:"100%", height:`${s.pct}%`, background:s.color, transition:"height 1.5s ease" }}></div>
+                    <div style={{ position:"absolute", inset:0, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"0.75rem", fontWeight:900, color:s.textColor }}>{s.pct}%</div>
+                  </div>
+                  <span style={{ fontSize:"0.65rem", fontWeight:700, color: s.pct < 20 ? "#f97316" : "#94a3b8", textTransform:"uppercase" }}>{s.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-      {/* Filtros */}
-      <div className="mod-filtros">
-        <input className="mod-search" placeholder="🔍  Buscar producto..." value={busqueda} onChange={e=>setBusqueda(e.target.value)} />
-        <div className="mod-filtro-btns">
-          {["Todos","Alimento","Medicamento","Insumo","Herramienta","Equipo","Otro"].map(t=>(
-            <button key={t} className={`mod-filtro-btn ${filtroTipo===t?"active":""}`} onClick={()=>setFiltroTipo(t)}>{t}</button>
+        {/* ── KPI CARDS ────────────────────── */}
+        <section style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:"1.5rem" }}>
+          {[
+            { label:"Valor de Inventario", val:"$42.850", ico:"💰", tag:"ACTIVO",      tagColor:"#22c55e", tagBg:"rgba(134,239,172,0.2)" },
+            { label:"Alertas Críticas",    val:"04",      ico:"⚠️", tag:"STOCK BAJO",  tagColor:"#f97316", tagBg:"rgba(249,115,22,0.1)" },
+            { label:"Concentrado Total",   val:"1.240 Kg",ico:"🌿", tag:"",            tagColor:"",        tagBg:"" },
+            { label:"Lotes Medicina",      val:"12 Und",  ico:"💊", tag:"",            tagColor:"",        tagBg:"" },
+          ].map((k,i) => (
+            <div key={i} style={{ background:"rgba(255,255,255,0.8)", backdropFilter:"blur(16px)", border:"1px solid rgba(34,197,94,0.1)", borderRadius:24, padding:"1.5rem", display:"flex", flexDirection:"column", gap:12 }}>
+              <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start" }}>
+                <div style={{ width:48, height:48, background:"rgba(134,239,172,0.1)", borderRadius:16, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"1.4rem" }}>{k.ico}</div>
+                {k.tag && <span style={{ fontSize:"0.6rem", fontWeight:900, background:k.tagBg, color:k.tagColor, padding:"0.25rem 0.6rem", borderRadius:8 }}>{k.tag}</span>}
+              </div>
+              <p style={{ fontSize:"0.7rem", fontWeight:700, color:"#94a3b8", textTransform:"uppercase", letterSpacing:"0.1em", margin:0 }}>{k.label}</p>
+              <p style={{ fontSize:"1.6rem", fontWeight:900, color:"#1e293b", margin:0 }}>{k.val}</p>
+            </div>
           ))}
-        </div>
-      </div>
+        </section>
 
-      {/* Tabla */}
-      <div className="mod-tabla-wrap">
-        <table className="mod-tabla">
-          <thead>
-            <tr><th>Nombre</th><th>Tipo</th><th>Categoría</th><th>cantidad_actual</th><th>cantidad_min</th><th>Unidad</th><th>Estado equipo</th><th>Activo</th><th>Acciones</th></tr>
-          </thead>
-          <tbody>
-            {filtrados.map(p=>(
-              <tr key={p.id} className={p.cantidad_actual<=p.cantidad_min?"row-warn":""}>
-                <td><strong>{p.nombre}</strong></td>
-                <td><span className={`mod-cat ${TIPO_COLOR[p.tipo]||"cat-gray"}`}>{p.tipo}</span></td>
-                <td>{p.categoria}</td>
-                <td><strong style={{color:p.cantidad_actual<=p.cantidad_min?"var(--rust)":"inherit"}}>{p.cantidad_actual}</strong></td>
-                <td>{p.cantidad_min}</td>
-                <td>{p.unidad}</td>
-                <td><span className={`mod-estado ${ESTADO_EQ[p.estado]||"est-gray"}`}>{p.estado}</span></td>
-                <td><span className={`mod-estado ${p.activo?"est-ok":"est-gray"}`}>{p.activo?"Sí":"No"}</span></td>
-                <td>
-                  <div className="mod-acciones">
-                    <button className="mod-acc-btn" title="Ver">👁</button>
-                    <button className="mod-acc-btn" title="Editar">✏️</button>
-                    <button className="mod-acc-btn mod-acc-del" title="Eliminar">🗑</button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        {filtrados.length===0 && <div className="mod-empty">No se encontraron productos.</div>}
-      </div>
+        {/* ── SUMINISTROS + TABLA ──────────── */}
+        <div style={{ display:"grid", gridTemplateColumns:"1fr 2fr", gap:"2.5rem" }}>
 
-      {/* Modal */}
-      {mostrarModal && (
-        <div className="mod-overlay" onClick={()=>setMostrarModal(false)}>
-          <div className="mod-modal" onClick={e=>e.stopPropagation()}>
-            <div className="mod-modal-header">
-              <h2>{modalTipo==="producto"?"Nuevo Producto":"Registrar Movimiento"}</h2>
-              <button className="mod-modal-close" onClick={()=>setMostrarModal(false)}>✕</button>
+          {/* Suministros por categoría */}
+          <div style={{ display:"flex", flexDirection:"column", gap:"1.5rem" }}>
+            <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
+              <h2 style={{ fontSize:"1.1rem", fontWeight:900, textTransform:"uppercase", letterSpacing:"0.05em", color:"#1e293b", margin:0 }}>Suministros</h2>
+              <button style={{ fontSize:"0.7rem", fontWeight:900, textTransform:"uppercase", letterSpacing:"0.1em", color:"#22c55e", background:"none", border:"none", cursor:"pointer" }}>Ver Todo</button>
             </div>
-            <div className="mod-modal-body">
-              {modalTipo==="producto" ? (
-                <div className="mod-form-grid">
-                  <div className="mod-field mod-field-full"><label>Nombre <span className="mod-req">*</span></label><input placeholder="Ej: Concentrado Premium" /></div>
-                  <div className="mod-field"><label>Tipo <span className="mod-req">*</span></label>
-                    <select><option>Alimento</option><option>Medicamento</option><option>Insumo</option><option>Herramienta</option><option>Equipo</option><option>Otro</option></select>
+            <div style={{ background:"rgba(255,255,255,0.8)", backdropFilter:"blur(16px)", border:"1px solid rgba(34,197,94,0.1)", borderRadius:32, padding:"2rem", display:"flex", flexDirection:"column", gap:"1.5rem" }}>
+              {SUMINISTROS.map((s,i) => (
+                <div key={i} style={{ display:"flex", flexDirection:"column", gap:8 }}>
+                  <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-end" }}>
+                    <span style={{ fontSize:"0.75rem", fontWeight:900, color: s.alerta ? "#f97316" : "#94a3b8", textTransform:"uppercase" }}>{s.nombre}</span>
+                    <span style={{ fontSize:"0.875rem", fontWeight:900, color: s.alerta ? "#f97316" : "#334155" }}>{s.pct}%</span>
                   </div>
-                  <div className="mod-field"><label>Categoría</label><input placeholder="Ej: Forraje, Antibiótico..." /></div>
-                  <div className="mod-field"><label>Unidad</label>
-                    <select><option>kg</option><option>ml</option><option>lts</option><option>und</option><option>bulto</option></select>
-                  </div>
-                  <div className="mod-field"><label>cantidad_actual</label><input type="number" placeholder="0" /></div>
-                  <div className="mod-field"><label>cantidad_min</label><input type="number" placeholder="0" /></div>
-                  <div className="mod-field"><label>Estado</label>
-                    <select><option>Operativo</option><option>En_Reparacion</option><option>Dañado</option><option>Baja</option></select>
+                  <div style={{ width:"100%", height:12, background:"#f0fdf4", borderRadius:999, overflow:"hidden", border:"1px solid rgba(34,197,94,0.1)" }}>
+                    <div style={{ height:"100%", width:`${s.pct}%`, background:s.color, borderRadius:999, boxShadow: s.pct > 80 ? "0 0 10px rgba(34,197,94,0.3)" : "none" }}></div>
                   </div>
                 </div>
-              ) : (
-                // tabla: movimiento_producto — campos: producto_id, tipo, cantidad
-                <div className="mod-form-grid">
-                  <div className="mod-field mod-field-full"><label>Producto <span className="mod-req">*</span></label>
-                    <select>{MOCK.map(p=><option key={p.id} value={p.id}>{p.nombre}</option>)}</select>
-                  </div>
-                  <div className="mod-field"><label>Tipo <span className="mod-req">*</span></label>
-                    <select><option>ENTRADA</option><option>SALIDA</option><option>AJUSTE</option></select>
-                  </div>
-                  <div className="mod-field"><label>Cantidad <span className="mod-req">*</span></label><input type="number" placeholder="0" /></div>
-                </div>
-              )}
+              ))}
             </div>
-            <div className="mod-modal-footer">
-              <button className="mod-btn-ghost" onClick={()=>setMostrarModal(false)}>Cancelar</button>
-              <button className="mod-btn-primary" onClick={()=>setMostrarModal(false)}>Guardar</button>
+          </div>
+
+          {/* Flujos de carga */}
+          <div style={{ display:"flex", flexDirection:"column", gap:"1.5rem" }}>
+            <h2 style={{ fontSize:"1.1rem", fontWeight:900, textTransform:"uppercase", letterSpacing:"0.05em", color:"#1e293b", margin:0 }}>Flujos de Carga</h2>
+            <div style={{ background:"rgba(255,255,255,0.8)", backdropFilter:"blur(16px)", borderRadius:32, overflow:"hidden", boxShadow:"0 8px 32px rgba(34,197,94,0.05)" }}>
+              <table style={{ width:"100%", borderCollapse:"collapse", textAlign:"left" }}>
+                <thead style={{ background:"rgba(240,253,244,0.5)" }}>
+                  <tr>
+                    {["Producto","Fecha","Estado"].map(h => (
+                      <th key={h} style={{ padding:"1.25rem 2rem", fontSize:"0.65rem", fontWeight:900, textTransform:"uppercase", letterSpacing:"0.2em", color:"#94a3b8" }}>{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody style={{ background:"rgba(255,255,255,0.5)" }}>
+                  {PRODUCTOS.map((p,i) => (
+                    <tr key={i} style={{ borderTop:"1px solid rgba(34,197,94,0.05)", cursor:"pointer" }}
+                      onMouseEnter={e => e.currentTarget.style.background="rgba(34,197,94,0.05)"}
+                      onMouseLeave={e => e.currentTarget.style.background="transparent"}>
+                      <td style={{ padding:"1.25rem 2rem" }}>
+                        <div style={{ display:"flex", alignItems:"center", gap:"1rem" }}>
+                          <div style={{ width:40, height:40, background:"#f0fdf4", borderRadius:12, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"1.2rem" }}>{p.ico}</div>
+                          <div>
+                            <p style={{ fontSize:"0.875rem", fontWeight:800, color:"#334155", margin:0 }}>{p.nombre}</p>
+                            <p style={{ fontSize:"0.65rem", fontWeight:700, color:"#94a3b8", textTransform:"uppercase", letterSpacing:"-0.03em", margin:"2px 0 0", fontFamily:"monospace" }}>ID: {p.id}</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td style={{ padding:"1.25rem 2rem", fontSize:"0.875rem", fontWeight:500, color:"#94a3b8" }}>{p.fecha}</td>
+                      <td style={{ padding:"1.25rem 2rem", textAlign:"center" }}>
+                        <span style={{ display:"inline-flex", alignItems:"center", padding:"0.4rem 1rem", borderRadius:999, fontSize:"0.65rem", fontWeight:900, background:p.estadoBg, color:p.estadoColor, textTransform:"uppercase", letterSpacing:"0.1em" }}>
+                          {p.estado}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <div style={{ padding:"1.25rem 2rem", background:"rgba(240,253,244,0.3)", display:"flex", justifyContent:"space-between", alignItems:"center", borderTop:"1px solid rgba(34,197,94,0.05)" }}>
+                <span style={{ fontSize:"0.65rem", fontWeight:900, color:"#94a3b8", textTransform:"uppercase", letterSpacing:"0.1em" }}>Mostrando 3 de 124 registros</span>
+                <div style={{ display:"flex", gap:"1rem" }}>
+                  <button style={{ fontSize:"0.65rem", fontWeight:900, textTransform:"uppercase", letterSpacing:"0.2em", color:"#94a3b8", background:"none", border:"none", cursor:"pointer" }}>Anterior</button>
+                  <button onClick={() => navigate("/inventario")} style={{ fontSize:"0.65rem", fontWeight:900, textTransform:"uppercase", letterSpacing:"0.2em", color:"#22c55e", background:"none", border:"none", cursor:"pointer" }}>Ver Todo →</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      )}
+
+      </main>
     </div>
   );
 }
