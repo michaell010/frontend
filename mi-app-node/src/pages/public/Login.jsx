@@ -7,41 +7,47 @@ export default function Login() {
   const navigate = useNavigate();
   const [active, setActive] = useState(false);
 
-  const [correo,     setCorreo]     = useState("");
+  const [correo, setCorreo] = useState("");
   const [contrasena, setContrasena] = useState("");
-  const [error,      setError]      = useState("");
-  const [cargando,   setCargando]   = useState(false);
+  const [error, setError] = useState("");
+  const [cargando, setCargando] = useState(false);
 
   const handleLogin = async () => {
     if (!correo || !contrasena) {
       setError("Por favor ingresa correo y contraseña.");
       return;
     }
+
     setCargando(true);
     setError("");
+
     try {
       const res = await login(correo, contrasena);
+
       if (res.ok) {
         navigate("/dashboard");
       } else {
         setError(res.mensaje || "Credenciales incorrectas.");
       }
     } catch (err) {
-      setError(err?.mensaje || "Error al conectar con el servidor.");
+      setError("Error al conectar con el servidor.");
     } finally {
       setCargando(false);
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleLogin();
+  };
+
   return (
     <div className={`container ${active ? "right-panel-active" : ""}`} id="container">
-
-      {/* ── Register ─────────────────────── */}
       <div className="form-container register-container">
-        <form onSubmit={e => e.preventDefault()}>
+        <form onSubmit={(e) => e.preventDefault()}>
           <h1>Registro</h1>
-          <input type="text"     placeholder="Nombre Completo" />
-          <input type="email"    placeholder="Correo Electrónico" />
+          <input type="text" placeholder="Nombre Completo" />
+          <input type="email" placeholder="Correo Electrónico" />
           <input type="password" placeholder="Contraseña" />
           <button type="button">Registrar</button>
           <span>Ingresa tus datos para Registrarte</span>
@@ -51,50 +57,55 @@ export default function Login() {
         </form>
       </div>
 
-      {/* ── Login ────────────────────────── */}
       <div className="form-container login-container">
-        <form onSubmit={e => e.preventDefault()}>
+        <form onSubmit={handleSubmit}>
           <h1>Iniciar Sesión</h1>
+
           <input
             type="email"
             placeholder="Correo Electrónico"
             value={correo}
-            onChange={e => setCorreo(e.target.value)}
+            onChange={(e) => setCorreo(e.target.value)}
             disabled={cargando}
           />
+
           <input
             type="password"
             placeholder="Contraseña"
             value={contrasena}
-            onChange={e => setContrasena(e.target.value)}
-            onKeyDown={e => e.key === "Enter" && handleLogin()}
+            onChange={(e) => setContrasena(e.target.value)}
             disabled={cargando}
           />
+
           {error && (
-            <p style={{ color:"#c0392b", fontSize:"0.82rem", margin:"0.5rem 0", textAlign:"center" }}>
+            <p style={{ color: "#c0392b", fontSize: "0.82rem", margin: "0.5rem 0", textAlign: "center" }}>
               {error}
             </p>
           )}
+
           <div className="content">
             <div className="checkbox">
               <input type="checkbox" id="remember-me" />
               <label htmlFor="remember-me">Recordarme</label>
             </div>
+
             <div className="pass-link">
-              <a href="#">¿Olvidaste tu contraseña?</a>
+              <a href="/recuperar-password">¿Olvidaste tu contraseña?</a>
             </div>
           </div>
-          <button type="button" onClick={handleLogin} disabled={cargando}>
+
+          <button type="submit" disabled={cargando}>
             {cargando ? "Ingresando..." : "Ingresar"}
           </button>
+
           <span>Ingresa tus datos para continuar</span>
+
           <div className="social-container">
             <a href="#" className="social"><i className="lni lni-google"></i></a>
           </div>
         </form>
       </div>
 
-      {/* ── Overlay ──────────────────────── */}
       <div className="overlay-container">
         <div className="overlay">
           <div className="overlay-panel overlay-left">
@@ -104,6 +115,7 @@ export default function Login() {
               Iniciar Sesión <i className="lni lni-arrow-left login"></i>
             </button>
           </div>
+
           <div className="overlay-panel overlay-right">
             <h1 className="title">Tu finca, en tus manos</h1>
             <p>Ingresa tus datos personales y comienza tu viaje con nosotros</p>
@@ -113,7 +125,6 @@ export default function Login() {
           </div>
         </div>
       </div>
-
     </div>
   );
 }
